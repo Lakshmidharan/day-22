@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Flags</title>
+</head>
+
+<body>
+
+    <script>
+        var board = document.createElement("div")
+        board.style.width = "1500px";
+        board.style.display = "flex";
+        board.style.flexDirection = "row";
+        board.style.flexWrap = "wrap";
+        board.style.backgroundImage = "linear-gradient(to right,#4568dc ,#b06ab3)";
+
+        fetch("https://restcountries.com/v3.1/all")
+
+            .then(function (data) {
+                return data.json();
+            })
+            .then(function (dataObj) {
+                console.log(dataObj)
+
+                dataObj.forEach(function(element) {
+
+                    var mydiv = document.createElement('div')
+                    mydiv.style.width = "200px";
+                    mydiv.style.height = "200px";
+                    mydiv.style.display = "flex";
+                    mydiv.style.flexDirection = "column";
+                    mydiv.style.border = "2px solid black";
+                    mydiv.style.margin = "0px 20px 20px 30px";
+                 
+
+                    board.appendChild(mydiv)
+
+                    var box = document.createElement('img')
+                    box.style.width = "199px";
+                    box.style.height = "100px";
+                    box.style.border = "1px solid black";
+                    box.setAttribute("src", element.flags.png);
+                    mydiv.appendChild(box);
+
+                    var cName = document.createElement("div")
+                    cName.style.width = "200px";
+                    cName.style.height = "50px";
+                    cName.style.textAlign = "center";
+                    cName.style.fontSize = "20px";
+                    cName.style.padding = "15px 0px 0px 0px";
+                    cName.style.fontFamily = " Times new roman";
+                    cName.innerText = element.name.common;
+
+                    mydiv.appendChild(cName);
+
+                    var Csign = document.createElement("div");
+                    Csign.style.width = "200px";
+                    Csign.style.height = "50px";
+                    Csign.style.textAlign = "center";
+                    Csign.style.fontFamily = " Times new roman";
+                    Csign.style.padding = "0px 0px 0px 0px";
+                    Csign.innerText = element.car.signs;
+
+                    mydiv.appendChild(Csign);
+
+
+
+                })
+                document.body.appendChild(board);
+            })
+
+            .catch(function (err) {
+                console.log(err);
+            })
+
+
+    </script>
+</body>
+
+</html>
